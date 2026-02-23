@@ -2184,9 +2184,7 @@ struct ContentView: View {
     }
 
     private func openInEditor(_ path: String, tabManager: TabManager?) {
-        let escaped = path.replacingOccurrences(of: "'", with: "'\\''")
-        let command = "${EDITOR:-vi} '\(escaped)'\r"
-        tabManager?.selectedTab?.focusedTerminalPanel?.sendText(command)
+        tabManager?.selectedTab?.newCodeEditorSurfaceInFocusedPane(filePath: path, focus: true)
     }
 
     private var contentAndSidebarLayout: AnyView {
