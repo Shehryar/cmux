@@ -339,6 +339,9 @@ extension Workspace {
                 backHistoryURLStrings: historySnapshot.backHistoryURLStrings,
                 forwardHistoryURLStrings: historySnapshot.forwardHistoryURLStrings
             )
+        case .codeEditor:
+            // Code editor panels are transient and not persisted across sessions
+            return nil
         }
 
         return SessionPanelSnapshot(
@@ -513,6 +516,9 @@ extension Workspace {
             }
             applySessionPanelMetadata(snapshot, toPanelId: browserPanel.id)
             return browserPanel.id
+        case .codeEditor:
+            // Code editor panels are not restored from session snapshots
+            return nil
         }
     }
 
